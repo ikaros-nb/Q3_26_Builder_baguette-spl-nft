@@ -5,13 +5,14 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "spl:init": "ts-node src/spl/spl_init.ts",
-    "spl:metadata": "ts-node src/spl/spl_metadata.ts",
-    "spl:mint": "ts-node src/spl/spl_mint.ts",
-    "spl:transfer": "ts-node src/spl/spl_transfer.ts",
-    "nft:image": "ts-node src/nft/nft_image.ts",
-    "nft:metadata": "ts-node src/nft/nft_metadata.ts",
-    "nft:mint": "ts-node src/nft/nft_mint.ts"
+    "spl:init": "tsx src/spl/spl_init.ts",
+    "spl:image": "tsx src/spl/spl_image.ts",
+    "spl:metadata": "tsx src/spl/spl_metadata.ts",
+    "spl:mint": "tsx src/spl/spl_mint.ts",
+    "spl:transfer": "tsx src/spl/spl_transfer.ts",
+    "nft:image": "tsx src/nft/nft_image.ts",
+    "nft:metadata": "tsx src/nft/nft_metadata.ts",
+    "nft:mint": "tsx src/nft/nft_mint.ts"
   },
   "keywords": [],
   "author": "",
@@ -30,7 +31,7 @@
   },
   "devDependencies": {
     "@types/node": "^26.4.0",
-    "ts-node": "^10.9.2",
+    "tsx": "^4.23.12",
     "typescript": "^7.0.2"
   }
 }
