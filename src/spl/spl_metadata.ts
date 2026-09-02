@@ -12,11 +12,11 @@ import {
   DataV2Args,
 } from "@metaplex-foundation/mpl-token-metadata";
 import bs58 from "bs58";
-import { RPC_URL } from "../config";
+import { COMMITMENT, RPC_URL } from "../config";
 import { TOKEN } from "./config";
 import { requireMetadataUri, requireMint } from "./state";
 
-const umi = createUmi(RPC_URL);
+const umi = createUmi(RPC_URL, COMMITMENT);
 
 const keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(wallet));
 const signer = createSignerFromKeypair(umi, keypair);

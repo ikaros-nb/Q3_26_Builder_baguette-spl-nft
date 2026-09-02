@@ -8,10 +8,10 @@ import { fetchAsset, mplCore, transfer } from "@metaplex-foundation/mpl-core";
 import { base58 } from "@metaplex-foundation/umi/serializers";
 import wallet from "../../devnet-wallet.json";
 import { RECIPIENT } from "./config";
-import { RPC_URL } from "../config";
+import { COMMITMENT, RPC_URL } from "../config";
 import { requireAsset, writeState } from "./state";
 
-const umi = createUmi(RPC_URL);
+const umi = createUmi(RPC_URL, COMMITMENT);
 
 const keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(wallet));
 const signer = createSignerFromKeypair(umi, keypair);

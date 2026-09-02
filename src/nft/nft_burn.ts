@@ -9,10 +9,10 @@ import {
 import { burn, fetchAsset, mplCore } from "@metaplex-foundation/mpl-core";
 import { base58 } from "@metaplex-foundation/umi/serializers";
 import { OWNER_WALLET_PATH } from "./config";
-import { RPC_URL } from "../config";
+import { COMMITMENT, RPC_URL } from "../config";
 import { requireAsset } from "./state";
 
-const umi = createUmi(RPC_URL);
+const umi = createUmi(RPC_URL, COMMITMENT);
 
 if (!existsSync(OWNER_WALLET_PATH)) {
   console.error(`no keypair at ${OWNER_WALLET_PATH} — the owner has to sign`);

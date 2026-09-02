@@ -6,6 +6,9 @@ export const RPC_URL =
 export const RPC_WS_URL =
   process.env.SOLANA_RPC_WS_URL ?? "wss://api.devnet.solana.com";
 
+// umi sends no commitment of its own on reads
+export const COMMITMENT = "confirmed" as const;
+
 // devnet node: paid in devnet SOL, and uploads expire after a few days
 export const IRYS_ADDRESS =
   process.env.IRYS_ADDRESS ?? "https://devnet.irys.xyz";

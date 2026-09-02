@@ -7,11 +7,11 @@ import { irysUploader } from "@metaplex-foundation/umi-uploader-irys";
 import { fetchAsset, mplCore, update } from "@metaplex-foundation/mpl-core";
 import { base58 } from "@metaplex-foundation/umi/serializers";
 import wallet from "../../devnet-wallet.json";
-import { IRYS_ADDRESS, RPC_URL } from "../config";
+import { COMMITMENT, IRYS_ADDRESS, RPC_URL } from "../config";
 import { ATTRIBUTES_UPDATE, buildMetadataJson, NFT_UPDATE } from "./config";
 import { requireAsset, requireImageUri, writeState } from "./state";
 
-const umi = createUmi(RPC_URL);
+const umi = createUmi(RPC_URL, COMMITMENT);
 
 const keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(wallet));
 const signer = createSignerFromKeypair(umi, keypair);

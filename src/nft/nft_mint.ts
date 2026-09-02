@@ -7,11 +7,11 @@ import {
 } from "@metaplex-foundation/umi";
 import { create, mplCore } from "@metaplex-foundation/mpl-core";
 import { base58 } from "@metaplex-foundation/umi/serializers";
-import { RPC_URL } from "../config";
+import { COMMITMENT, RPC_URL } from "../config";
 import { NFT } from "./config";
 import { requireMetadataUri, writeState } from "./state";
 
-const umi = createUmi(RPC_URL);
+const umi = createUmi(RPC_URL, COMMITMENT);
 
 const keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(wallet));
 const signer = createSignerFromKeypair(umi, keypair);
