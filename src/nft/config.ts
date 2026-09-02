@@ -53,5 +53,11 @@ export function buildMetadataJson(
   };
 }
 
-// who nft_transfer.ts sends tokens to
+// Who nft_transfer.ts sends tokens to
 export const RECIPIENT = "DthmPeWWnHBeK9aJheug5LAGUbecoMVU7NMKeMzVrASB";
+
+// For `nft:transfer` usage. Act as owner to burn the NFT.
+export const OWNER_WALLET_PATH = path.join(
+  __dirname,
+  "../../devnet-wallet-2.json",
+);

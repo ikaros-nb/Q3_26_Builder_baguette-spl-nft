@@ -15,7 +15,9 @@
     "nft:metadata": "tsx src/nft/nft_metadata.ts",
     "nft:mint": "tsx src/nft/nft_mint.ts",
     "nft:update": "tsx src/nft/nft_update.ts",
-    "nft:transfer": "tsx src/nft/nft_transfer.ts"
+    "nft:transfer": "tsx src/nft/nft_transfer.ts",
+    "nft:burn": "tsx src/nft/nft_burn.ts",
+    "nft:test": "pnpm nft:image && pnpm nft:metadata && pnpm nft:mint && pnpm nft:update && pnpm nft:transfer && pnpm nft:burn"
   },
   "keywords": [],
   "author": "",

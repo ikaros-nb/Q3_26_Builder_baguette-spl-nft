@@ -11,10 +11,8 @@ node_modules/
 .env.production
 
 devnet-wallet.json
-images-cat.jpeg
+devnet-wallet-2.json
 
 # written by the scripts at runtime
 nft-state.json
 spl-state.json
-
-wallet.json
