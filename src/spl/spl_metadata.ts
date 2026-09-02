@@ -12,11 +12,11 @@ import {
   DataV2Args,
 } from "@metaplex-foundation/mpl-token-metadata";
 import bs58 from "bs58";
+import { RPC_URL } from "../config";
+import { TOKEN } from "./config";
+import { requireMetadataUri, requireMint } from "./state";
 
-//paste your mint address got from spl_init.ts
-const mint = publicKey("7kebpcinzpQVjuAxifmWnTFQ64i6rWnptfbQRZZNs2SA");
-
-const umi = createUmi("https://api.devnet.solana.com");
+const umi = createUmi(RPC_URL);
 
 const keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(wallet));
 const signer = createSignerFromKeypair(umi, keypair);
@@ -25,16 +25,19 @@ umi.use(signerIdentity(signer));
 
 (async () => {
   try {
+    // written by spl_init.ts
+    const mint = publicKey(requireMint());
+
     const accounts: CreateMetadataAccountV3InstructionAccounts = {
       mint,
       mintAuthority: signer,
     };
 
-    //change the metadata
+    // name and symbol come from config.ts, the uri from spl_image.ts
     const data: DataV2Args = {
-      name: "Baguette Coin",
-      symbol: "BAC",
-      uri: "https://gateway.irys.xyz/4HWJVVuRT64Z96mG3LLiaKCotoTWzcfCzkGhphjNnXLo",
+      name: TOKEN.name,
+      symbol: TOKEN.symbol,
+      uri: requireMetadataUri(),
       sellerFeeBasisPoints: 0,
       creators: null,
       collection: null,

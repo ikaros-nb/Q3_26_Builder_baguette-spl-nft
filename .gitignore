@@ -13,4 +13,7 @@ node_modules/
 devnet-wallet.json
 images-cat.jpeg
 
+# written by the scripts at runtime, see src/spl/state.ts
+spl-state.json
+
 wallet.json

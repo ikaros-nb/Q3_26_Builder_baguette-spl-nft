@@ -20,20 +20,21 @@ import {
   TOKEN_PROGRAM_ADDRESS,
 } from "@solana-program/token";
 
-const rpc = createSolanaRpc("https://api.devnet.solana.com");
+import { RPC_URL, RPC_WS_URL } from "../config";
+import { AMOUNT_TO_TRANSFER, DECIMALS, RECIPIENT } from "./config";
+import { requireMint } from "./state";
 
-const rpcSubscriptions = createSolanaRpcSubscriptions(
-  "wss://api.devnet.solana.com",
-);
+const rpc = createSolanaRpc(RPC_URL);
 
-//paste your mint address got from spl_init.ts
-const mint = address("7kebpcinzpQVjuAxifmWnTFQ64i6rWnptfbQRZZNs2SA");
+const rpcSubscriptions = createSolanaRpcSubscriptions(RPC_WS_URL);
 
-//paste the address of the recipient
-const to = address("DthmPeWWnHBeK9aJheug5LAGUbecoMVU7NMKeMzVrASB");
+const to = address(RECIPIENT);
 
 (async () => {
   try {
+    // written by spl_init.ts
+    const mint = address(requireMint());
+
     const signer = await createKeyPairSignerFromBytes(new Uint8Array(wallet));
     const sendAndConfirm = sendAndConfirmTransactionFactory({
       rpc,
@@ -65,8 +66,8 @@ const to = address("DthmPeWWnHBeK9aJheug5LAGUbecoMVU7NMKeMzVrASB");
       mint,
       destination: toAta,
       authority: signer,
-      amount: 1_000n,
-      decimals: 6,
+      amount: AMOUNT_TO_TRANSFER,
+      decimals: DECIMALS,
     });
 
     const { value: latestBlockhash } = await rpc.getLatestBlockhash().send();

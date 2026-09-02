@@ -21,12 +21,13 @@ import { getCreateAccountInstruction } from "@solana-program/system";
 
 //import your wallet
 import wallet from "../../devnet-wallet.json";
+import { RPC_URL, RPC_WS_URL } from "../config";
+import { DECIMALS } from "./config";
+import { writeState } from "./state";
 
-const rpc = createSolanaRpc("https://api.devnet.solana.com");
+const rpc = createSolanaRpc(RPC_URL);
 
-const rpcSubscriptions = createSolanaRpcSubscriptions(
-  "wss://api.devnet.solana.com",
-);
+const rpcSubscriptions = createSolanaRpcSubscriptions(RPC_WS_URL);
 
 (async () => {
   try {
@@ -68,7 +69,7 @@ const rpcSubscriptions = createSolanaRpcSubscriptions(
         }),
         getInitializeMintInstruction({
           mint: mint.address,
-          decimals: 6,
+          decimals: DECIMALS,
           mintAuthority: signer.address,
           freezeAuthority: null,
         }),
@@ -88,6 +89,8 @@ const rpcSubscriptions = createSolanaRpcSubscriptions(
     console.log(
       `mint address: ${mint.address}. Transaction Signature: ${signature}`,
     );
+
+    writeState({ mint: mint.address });
   } catch (error) {
     console.error(error);
     process.exit(1);

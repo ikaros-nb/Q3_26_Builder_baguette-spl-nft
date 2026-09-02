@@ -8,18 +8,17 @@ import { irysUploader } from "@metaplex-foundation/umi-uploader-irys";
 import { readFile } from "fs/promises";
 import path from "path";
 import wallet from "../../devnet-wallet.json";
+import { IRYS_ADDRESS, RPC_URL } from "../config";
+import { IMAGE_CONTENT_TYPE, IMAGE_PATH, TOKEN } from "./config";
+import { writeState } from "./state";
 
-const IMAGE_PATH = path.join(__dirname, "../../assets/baguette-coin-logo.jpg");
-const IMAGE_CONTENT_TYPE = "image/jpeg";
-
-const umi = createUmi("https://api.devnet.solana.com");
+const umi = createUmi(RPC_URL);
 
 const keypair = umi.eddsa.createKeypairFromSecretKey(new Uint8Array(wallet));
 const signer = createSignerFromKeypair(umi, keypair);
 
 umi.use(signerIdentity(signer));
-// devnet node: paid in devnet SOL, and uploads expire after a few days
-umi.use(irysUploader({ address: "https://devnet.irys.xyz" }));
+umi.use(irysUploader({ address: IRYS_ADDRESS }));
 
 (async () => {
   try {
@@ -34,14 +33,13 @@ umi.use(irysUploader({ address: "https://devnet.irys.xyz" }));
 
     // 2. upload the off-chain metadata that DataV2Args.uri points at
     const metadataUri = await umi.uploader.uploadJson({
-      name: "Baguette Coin",
-      symbol: "BAC",
-      description: "A very French token.",
+      ...TOKEN,
       image: imageUri,
     });
 
     console.log("metadata uri:", metadataUri);
-    console.log("\npaste the metadata uri into spl_metadata.ts");
+
+    writeState({ imageUri, metadataUri });
   } catch (error) {
     console.error(error);
     process.exit(1);

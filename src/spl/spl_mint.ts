@@ -20,20 +20,19 @@ import {
   TOKEN_PROGRAM_ADDRESS,
 } from "@solana-program/token";
 
-const rpc = createSolanaRpc("https://api.devnet.solana.com");
+import { RPC_URL, RPC_WS_URL } from "../config";
+import { AMOUNT_TO_MINT } from "./config";
+import { requireMint } from "./state";
 
-const rpcSubscriptions = createSolanaRpcSubscriptions(
-  "wss://api.devnet.solana.com",
-);
+const rpc = createSolanaRpc(RPC_URL);
 
-// 1 token, expressed in base units (the mint has 6 decimals)
-const AMOUNT_TO_MINT = 1_000_000n;
-
-//paste your mint address got from spl_init.ts
-const mint = address("7kebpcinzpQVjuAxifmWnTFQ64i6rWnptfbQRZZNs2SA");
+const rpcSubscriptions = createSolanaRpcSubscriptions(RPC_WS_URL);
 
 (async () => {
   try {
+    // written by spl_init.ts
+    const mint = address(requireMint());
+
     const signer = await createKeyPairSignerFromBytes(new Uint8Array(wallet));
 
     const [ata] = await findAssociatedTokenPda({
