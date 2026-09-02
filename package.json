@@ -13,7 +13,8 @@
     "spl:test": "pnpm spl:init && pnpm spl:image && pnpm spl:metadata && pnpm spl:mint && pnpm spl:transfer",
     "nft:image": "tsx src/nft/nft_image.ts",
     "nft:metadata": "tsx src/nft/nft_metadata.ts",
-    "nft:mint": "tsx src/nft/nft_mint.ts"
+    "nft:mint": "tsx src/nft/nft_mint.ts",
+    "nft:update": "tsx src/nft/nft_update.ts"
   },
   "keywords": [],
   "author": "",

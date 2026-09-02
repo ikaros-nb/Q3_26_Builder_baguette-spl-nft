@@ -14,8 +14,41 @@ export const ATTRIBUTES = [
   { trait_type: "Origin", value: "Paris" },
 ];
 
+// For `pnpm nft:update` usage.
+export const NFT_UPDATE = {
+  name: "Baguette Grillée",
+  description: "A very French NFT, toasted with style.",
+};
+
+export const ATTRIBUTES_UPDATE = [
+  { trait_type: "Crust", value: "Burnt" },
+  { trait_type: "Radioactivity", value: "Contained" },
+  { trait_type: "Origin", value: "Paris" },
+];
+
 // The kind of media this asset is: image, video, audio, vr, or html.
-export const CATEGORY = "image";
+const CATEGORY = "image";
 
 export const IMAGE_PATH = path.join(__dirname, "../../assets/nft.jpg");
 export const IMAGE_CONTENT_TYPE = "image/jpeg";
+
+type Fields = { name: string; description: string };
+type Attribute = { trait_type: string; value: string };
+
+// For `nft:metadata` and `nft:update` usage.
+export function buildMetadataJson(
+  fields: Fields,
+  attributes: Attribute[],
+  imageUri: string,
+) {
+  return {
+    ...fields,
+    image: imageUri,
+    category: CATEGORY,
+    attributes,
+    properties: {
+      files: [{ uri: imageUri, type: IMAGE_CONTENT_TYPE }],
+      category: CATEGORY,
+    },
+  };
+}
