@@ -7,6 +7,7 @@ type State = {
   imageUri?: string;
   metadataUri?: string;
   asset?: string;
+  owner?: string;
 };
 
 export function readState(): State {

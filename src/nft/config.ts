@@ -52,3 +52,6 @@ export function buildMetadataJson(
     },
   };
 }
+
+// who nft_transfer.ts sends tokens to
+export const RECIPIENT = "DthmPeWWnHBeK9aJheug5LAGUbecoMVU7NMKeMzVrASB";
